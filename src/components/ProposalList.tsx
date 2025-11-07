@@ -56,7 +56,7 @@ const ProposalList = () => {
   const pendingProposals = mockProposals.filter(p => p.status === "pending");
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12" id="proposals-section">
       {/* Active Proposals */}
       <section className="animate-fade-in">
         <div className="flex items-center justify-between mb-6">

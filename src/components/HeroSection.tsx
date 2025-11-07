@@ -31,11 +31,24 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Button size="lg" className="gap-2 shadow-governance">
+            <Button 
+              size="lg" 
+              className="gap-2 shadow-governance"
+              onClick={() => {
+                document.getElementById('proposals-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <Vote className="h-5 w-5" />
               View Active Proposals
             </Button>
-            <Button size="lg" variant="outline" className="gap-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="gap-2"
+              onClick={() => {
+                window.open('https://docs.lovable.dev', '_blank');
+              }}
+            >
               Learn More
             </Button>
           </div>

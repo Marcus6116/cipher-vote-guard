@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Lock, CheckCircle2, XCircle, Clock } from "lucide-react";
+import VoteDialog from "./VoteDialog";
+import ResultsDialog from "./ResultsDialog";
 
 interface ProposalCardProps {
   id: number;
@@ -23,6 +26,9 @@ const ProposalCard = ({
   result,
   encrypted 
 }: ProposalCardProps) => {
+  const [voteDialogOpen, setVoteDialogOpen] = useState(false);
+  const [resultsDialogOpen, setResultsDialogOpen] = useState(false);
+
   const getStatusBadge = () => {
     switch (status) {
       case "active":
@@ -92,17 +98,32 @@ const ProposalCard = ({
             )}
           </div>
           {status === "active" && (
-            <Button size="sm" className="gap-2">
+            <Button size="sm" className="gap-2" onClick={() => setVoteDialogOpen(true)}>
               Vote Now
             </Button>
           )}
           {status === "closed" && (
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" onClick={() => setResultsDialogOpen(true)}>
               View Results
             </Button>
           )}
         </div>
       </CardContent>
+
+      <VoteDialog 
+        open={voteDialogOpen}
+        onOpenChange={setVoteDialogOpen}
+        proposalTitle={title}
+        encrypted={encrypted}
+      />
+      
+      <ResultsDialog
+        open={resultsDialogOpen}
+        onOpenChange={setResultsDialogOpen}
+        proposalTitle={title}
+        totalVotes={totalVotes}
+        result={result}
+      />
     </Card>
   );
 };
